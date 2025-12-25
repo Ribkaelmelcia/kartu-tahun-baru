@@ -2,21 +2,22 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<title>Kartu Natal & Tahun Baru 2026</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kartu Natal & Tahun Baru 2026</title>
 
 <style>
-/* ================== GLOBAL ================== */
+/* ===== GLOBAL ===== */
+*{box-sizing:border-box}
 body{
   margin:0;
-  font-family:'Segoe UI', Arial, sans-serif;
+  font-family:'Segoe UI',Arial,sans-serif;
   background:linear-gradient(180deg,#2a143f,#12081f);
-  height:100vh;
-  overflow:hidden;
+  min-height:100vh;
   color:#fff;
+  overflow-x:hidden;
 }
 
-/* ================== COUNTDOWN ================== */
+/* ===== COUNTDOWN ===== */
 #countdown-screen{
   position:fixed;
   inset:0;
@@ -26,78 +27,76 @@ body{
   justify-content:center;
   z-index:9999;
 }
-
 #countdown-screen video{
   width:100%;
   height:100%;
   object-fit:cover;
 }
 
-/* ================== CARD ================== */
-#card-screen{
-  display:none;
-}
+/* ===== CARD ===== */
+#card-screen{display:none}
 
 .card{
-  background:rgba(255,255,255,.92);
+  background:rgba(255,255,255,0.94);
   color:#333;
-  max-width:600px;
-  margin:40px auto;
-  padding:30px;
-  border-radius:14px;
+  width:min(92%,600px);
+  margin:clamp(16px,5vh,40px) auto;
+  padding:clamp(18px,4vw,32px);
+  border-radius:18px;
   text-align:center;
-  box-shadow:0 10px 25px rgba(0,0,0,.45);
+  box-shadow:0 12px 30px rgba(0,0,0,.45);
   animation:fadeIn 1.2s ease;
   position:relative;
   z-index:3;
 }
 
 .card h1{
+  font-size:clamp(1.4rem,4.5vw,2rem);
   color:#b22222;
-  margin:10px 0;
+  margin:12px 0;
+  line-height:1.3;
 }
 
 .card p{
-  font-size:1.1em;
+  font-size:clamp(.95rem,3.5vw,1.1rem);
+  margin:0 0 14px;
 }
 
 .signature{
-  margin-top:20px;
+  margin-top:18px;
   font-weight:bold;
   color:#b22222;
+  font-size:clamp(.9rem,3vw,1rem);
 }
 
-/* ================== BUTTON ================== */
+/* ===== BUTTON ===== */
 button,.share-btn{
-  margin:6px;
-  padding:10px 18px;
-  font-size:15px;
+  width:100%;
+  max-width:360px;
+  margin:6px auto;
+  padding:12px;
+  font-size:clamp(.9rem,3.5vw,1rem);
   border:none;
-  border-radius:6px;
+  border-radius:8px;
   cursor:pointer;
   background:#b22222;
   color:#fff;
   transition:.3s;
+  display:block;
   text-decoration:none;
-  display:inline-block;
 }
-button:hover,.share-btn:hover{
-  background:#8b1a1a;
-}
+button:hover,.share-btn:hover{background:#8b1a1a}
 
-/* ================== TREE ================== */
+/* ===== TREE ===== */
 .tree-container{
-  position:fixed;
-  bottom:0;
-  left:50%;
-  transform:translateX(-50%);
-  width:320px;
+  width:clamp(160px,35vw,320px);
+  margin:20px auto 0;
+  opacity:.85;
+  pointer-events:none;
+  position:relative;
   z-index:2;
 }
-
-.tree-container img{
-  width:100%;
-}
+.tree-container img{width:100%}
 
 .light{
   position:absolute;
@@ -112,46 +111,43 @@ button:hover,.share-btn:hover{
   to{opacity:1;transform:scale(1.2)}
 }
 
-/* ================== CONFETTI ================== */
-.confetti{
+/* ===== CONFETTI & FIREWORK ===== */
+.confetti,.firework{
   position:fixed;
+  pointer-events:none;
+  z-index:1;
+}
+
+.confetti{
   top:-10px;
-  font-size:20px;
+  font-size:18px;
+  opacity:.4;
   animation:fall linear infinite;
-  z-index:4;
 }
 
 @keyframes fall{
-  from{transform:translateY(0);opacity:1}
-  to{transform:translateY(100vh);opacity:0}
+  from{transform:translateY(0)}
+  to{transform:translateY(100vh)}
 }
 
-/* ================== FIREWORK ================== */
 .firework{
-  position:fixed;
   width:6px;
   height:6px;
   background:gold;
   border-radius:50%;
+  opacity:.7;
   animation:explode 1.5s ease-out forwards;
-  z-index:4;
 }
 
 @keyframes explode{
-  from{transform:scale(1);opacity:1}
-  to{transform:scale(20);opacity:0}
+  from{transform:scale(1)}
+  to{transform:scale(18);opacity:0}
 }
 
-/* ================== ANIM ================== */
+/* ===== ANIM ===== */
 @keyframes fadeIn{
   from{opacity:0;transform:translateY(20px)}
   to{opacity:1;transform:translateY(0)}
-}
-
-/* ================== RESPONSIVE ================== */
-@media(max-width:600px){
-  .card{margin:20px}
-  .tree-container{width:220px}
 }
 </style>
 </head>
@@ -179,8 +175,6 @@ button:hover,.share-btn:hover{
     <button onclick="pauseMusic()">⏸️ Hentikan Musik</button>
     <button onclick="playBell()">🔔 Bunyi Bel</button>
 
-    <br>
-
     <a class="share-btn" target="_blank"
        href="https://wa.me/?text=Selamat%20Natal%20dan%20Tahun%20Baru%202026%20🎄🎆%20https://ribkaelmelcia.github.io/kartu-tahun-baru/">
        📱 Bagikan WhatsApp
@@ -204,41 +198,45 @@ button:hover,.share-btn:hover{
 <audio id="bellSound" src="bell.mp3"></audio>
 
 <script>
-/* ================= AUDIO ================= */
+/* ===== AUDIO ===== */
 const bgMusic=document.getElementById("bgMusic");
 const bellSound=document.getElementById("bellSound");
-
 function playMusic(){bgMusic.play().catch(()=>{})}
 function pauseMusic(){bgMusic.pause()}
 function playBell(){bellSound.currentTime=0;bellSound.play().catch(()=>{})}
 
-/* ================= COUNTDOWN SAFE ================= */
+/* ===== COUNTDOWN SAFE ===== */
 const countdown=document.getElementById("countdown-video");
 const countdownScreen=document.getElementById("countdown-screen");
 const cardScreen=document.getElementById("card-screen");
-
-// fallback kalau video gagal
-setTimeout(showCard,12000);
-
-countdown.addEventListener("ended",showCard);
+let shown=false;
 
 function showCard(){
+  if(shown) return;
+  shown=true;
+  countdown.pause();
   countdownScreen.style.display="none";
   cardScreen.style.display="block";
 }
 
-/* ================= CONFETTI ================= */
+countdown.addEventListener("ended",showCard);
+countdown.addEventListener("loadedmetadata",()=>{
+  setTimeout(showCard,(countdown.duration||10)*1000+500);
+});
+countdownScreen.addEventListener("click",showCard);
+
+/* ===== CONFETTI ===== */
 setInterval(()=>{
   const c=document.createElement("div");
   c.className="confetti";
-  c.textContent=["🎉","🎊","✨","⭐"][Math.floor(Math.random()*4)];
+  c.textContent=["✨","⭐","🎉","🎊"][Math.floor(Math.random()*4)];
   c.style.left=Math.random()*innerWidth+"px";
   c.style.animationDuration=(Math.random()*3+2)+"s";
   document.body.appendChild(c);
   setTimeout(()=>c.remove(),5000);
-},250);
+},300);
 
-/* ================= FIREWORK ================= */
+/* ===== FIREWORK ===== */
 setInterval(()=>{
   const f=document.createElement("div");
   f.className="firework";
@@ -246,9 +244,9 @@ setInterval(()=>{
   f.style.top=Math.random()*innerHeight+"px";
   document.body.appendChild(f);
   setTimeout(()=>f.remove(),1500);
-},2000);
+},2500);
 
-/* ================= TREE LIGHT ================= */
+/* ===== TREE LIGHT ===== */
 const tree=document.getElementById("tree");
 const colors=["red","yellow","blue","lime"];
 
