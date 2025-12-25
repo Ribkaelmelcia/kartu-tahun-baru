@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Kartu Ucapan Natal</title>
+  <style>
+    /* ... [CSS sama persis seperti versi sebelumnya, tidak diubah] ... */
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>🎄 Selamat Natal 🎄</h1>
+    <p>Semoga damai, sukacita, dan kebahagiaan selalu menyertai Anda dan keluarga.</p>
+
+    <button onclick="playMusic()">▶️ Putar Musik</button>
+    <button onclick="pauseMusic()">⏸️ Hentikan Musik</button>
+    <button onclick="playBell()">🔔 Bunyi Bel</button>
+
+    <a class="share-btn" 
+       href="https://wa.me/?text=Selamat%20Natal%20🎄%20Semoga%20damai%20dan%20sukacita%20menyertai%20Anda%20dan%20keluarga.%20Lihat%20kartu%20interaktif%20di%20https://Ribkaelmelcia.github.io/kartu-natal" 
+       target="_blank">📱 Bagikan via WhatsApp</a>
+
+    <a class="share-btn" 
+       href="mailto:?subject=Selamat%20Natal&body=Selamat%20Natal%20🎄%20Semoga%20damai%20dan%20sukacita%20menyertai%20Anda%20dan%20keluarga.%20Lihat%20kartu%20interaktif%20di%20https://Ribkaelmelcia.github.io/kartu-natal" 
+       target="_blank">📧 Bagikan via Email</a>
+
+    <div class="signature">Elisa Ribka Elmelcia</div>
+  </div>
+
+  <div class="tree-container">
+    <img src="pohon.png" alt="Pohon Natal">
+  </div>
+
+  <audio id="bgMusic" loop>
+    <source src="natal.mp3" type="audio/mpeg">
+  </audio>
+  <audio id="bellSound">
+    <source src="bell.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    const bgMusic = document.getElementById("bgMusic");
+    const bellSound = document.getElementById("bellSound");
+
+    function playMusic() { bgMusic.play(); }
+    function pauseMusic() { bgMusic.pause(); }
+    function playBell() { bellSound.currentTime = 0; bellSound.play(); }
+
+    function createSnowflake() {
+      const snowflake = document.createElement("div");
+      snowflake.classList.add("snowflake");
+      snowflake.textContent = "❄";
+      snowflake.style.left = Math.random() * window.innerWidth + "px";
+      snowflake.style.animationDuration = (Math.random() * 3 + 2) + "s";
+      document.body.appendChild(snowflake);
+      setTimeout(() => snowflake.remove(), 5000);
+    }
+    setInterval(createSnowflake, 200);
+
+    function createFirework() {
+      const firework = document.createElement("div");
+      firework.classList.add("firework");
+      firework.style.top = Math.random() * window.innerHeight + "px";
+      firework.style.left = Math.random() * window.innerWidth + "px";
+      document.body.appendChild(firework);
+      setTimeout(() => firework.remove(), 1500);
+    }
+    setInterval(createFirework, 2000);
+
+    function createLights() {
+      const treeArea = document.querySelector(".tree-container");
+      for (let i = 0; i < 30; i++) {
+        const light = document.createElement("div");
+        light.classList.add("light");
+        light.style.position = "absolute";
+        light.style.top = (Math.random() * 500) + "px";
+        light.style.left = (Math.random() * 400) + "px";
+        light.style.background = ["red","yellow","blue","orange"][Math.floor(Math.random()*4)];
+        light.style.animationDuration = (Math.random()*1.5+0.5)+"s";
+        treeArea.appendChild(light);
+      }
+    }
+    createLights();
+  </script>
+</body>
+</html>
