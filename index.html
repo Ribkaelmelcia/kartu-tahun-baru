@@ -149,11 +149,13 @@
     function playBell() { bellSound.currentTime = 0; bellSound.play(); }
 
     // Countdown selesai -> tampilkan kartu
-    const countdownVideo = document.getElementById("countdown-video");
-    countdownVideo.onended = function() {
-      document.getElementById("countdown-screen").style.display = "none";
-      document.getElementById("card-screen").style.display = "block";
-    };
+    document.addEventListener("DOMContentLoaded", function() {
+      const countdownVideo = document.getElementById("countdown-video");
+      countdownVideo.addEventListener("ended", function() {
+        document.getElementById("countdown-screen").style.display = "none";
+        document.getElementById("card-screen").style.display = "block";
+      });
+    });
 
     // Confetti + Sparkles
     function createConfetti() {
@@ -185,5 +187,4 @@
         const light = document.createElement("div");
         light.classList.add("light");
         light.style.top = (Math.random() * 500) + "px";
-        light.style.left = (Math.random() * 300) + "px";
-        light.style.background = ["red","yellow","blue","orange"][Math.floor(Math.random()*
+        light.style.left = (Math.random() * 300) + "
