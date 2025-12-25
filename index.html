@@ -6,23 +6,11 @@
   <style>
     body {
       font-family: 'Segoe UI', Arial, sans-serif;
-      background: linear-gradient(135deg, #b57edc, #d8bfd8, #c8a2c8, #e6e6fa);
-      background-size: 400% 400%;
-      animation: metallicShift 10s ease infinite;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
+      background: linear-gradient(180deg, #2a143f, #12081f);
       height: 100vh;
       margin: 0;
       overflow: hidden;
       color: #fff;
-      padding-top: 30px;
-    }
-
-    @keyframes metallicShift {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
     }
 
     .card {
@@ -36,7 +24,7 @@
       position: relative;
       z-index: 2;
       color: #333;
-      margin: auto;
+      margin: 40px auto;
     }
 
     .card h1 { color: #b22222; font-size: 2em; margin-bottom: 10px; }
@@ -75,11 +63,18 @@
     }
     @keyframes twinkle { from { opacity: 0.2; transform: scale(0.8);} to { opacity: 1; transform: scale(1.2);} }
 
-    .snowflake {
-      position: fixed; top: -10px; color: #fff;
-      font-size: 20px; animation: fall linear infinite; z-index: 3;
+    /* Confetti & Sparkles */
+    .confetti {
+      position: fixed;
+      top: -10px;
+      font-size: 20px;
+      animation: fall linear infinite;
+      z-index: 3;
     }
-    @keyframes fall { 0% { transform: translateY(0); opacity: 1;} 100% { transform: translateY(100vh); opacity: 0;} }
+    @keyframes fall {
+      0% { transform: translateY(0); opacity: 1; }
+      100% { transform: translateY(100vh); opacity: 0; }
+    }
 
     .firework {
       position: absolute; width: 5px; height: 5px;
@@ -96,38 +91,49 @@
       .card { max-width: 95%; padding: 15px; }
       .tree-container { width: 180px; }
     }
+
+    /* Layar countdown */
+    #countdown-screen {
+      position:fixed;top:0;left:0;width:100%;height:100%;
+      background:#000;z-index:9999;
+      display:flex;justify-content:center;align-items:center;
+    }
   </style>
 </head>
 <body>
-  <div class="card">
-    <h1>🎄 Selamat Natal 🎄</h1>
-    <p>Semoga damai, sukacita, dan kebahagiaan selalu menyertai Anda dan keluarga.</p>
+  <!-- Layar Countdown -->
+  <div id="countdown-screen">
+    <video id="countdown-video" width="100%" autoplay>
+      <source src="countdown.mp4" type="video/mp4">
+      Browser Anda tidak mendukung video.
+    </video>
+  </div>
 
-    <h1>🎆 Selamat Tahun Baru 2026 🎆</h1>
-    <p>Semoga tahun baru membawa harapan, keberuntungan, dan kebahagiaan yang berlimpah!</p>
+  <!-- Halaman Kartu (disembunyikan dulu) -->
+  <div id="card-screen" style="display:none;">
+    <div class="card">
+      <h1>🎄 Selamat Natal 🎄</h1>
+      <p>Semoga damai, sukacita, dan kebahagiaan selalu menyertai Anda dan keluarga.</p>
 
-    <button onclick="playMusic()">▶️ Putar Musik</button>
-    <button onclick="pauseMusic()">⏸️ Hentikan Musik</button>
-    <button onclick="playBell()">🔔 Bunyi Bel</button>
+      <h1>🎆 Selamat Tahun Baru 2026 🎆</h1>
+      <p>Semoga tahun baru membawa harapan, keberuntungan, dan kebahagiaan yang berlimpah!</p>
 
-    <a class="share-btn" href="https://wa.me/?text=Selamat%20Natal%20dan%20Tahun%20Baru%202026%20🎄🎆%20Lihat%20kartu%20interaktif%20di%20https://Ribkaelmelcia.github.io/kartu-tahun-baru" target="_blank">📱 Bagikan via WhatsApp</a>
-    <a class="share-btn" href="mailto:?subject=Selamat%20Natal%20dan%20Tahun%20Baru%202026&body=Selamat%20Natal%20dan%20Tahun%20Baru%202026%20🎄🎆%20Lihat%20kartu%20interaktif%20di%20https://Ribkaelmelcia.github.io/kartu-tahun-baru" target="_blank">📧 Bagikan via Email</a>
+      <button onclick="playMusic()">▶️ Putar Musik</button>
+      <button onclick="pauseMusic()">⏸️ Hentikan Musik</button>
+      <button onclick="playBell()">🔔 Bunyi Bel</button>
 
-    <div class="signature">Elisa Ribka Elmelcia</div>
+      <a class="share-btn" href="https://wa.me/?text=Selamat%20Natal%20dan%20Tahun%20Baru%202026%20🎄🎆%20Lihat%20kartu%20interaktif%20di%20https://Ribkaelmelcia.github.io/kartu-tahun-baru" target="_blank">📱 Bagikan via WhatsApp</a>
+      <a class="share-btn" href="mailto:?subject=Selamat%20Natal%20dan%20Tahun%20Baru%202026&body=Selamat%20Natal%20dan%20Tahun%20Baru%202026%20🎄🎆%20Lihat%20kartu%20interaktif%20di%20https://Ribkaelmelcia.github.io/kartu-tahun-baru" target="_blank">📧 Bagikan via Email</a>
 
-    <!-- Tambahan Video -->
-    <div style="margin-top:20px;">
-      <video width="100%" controls>
-        <source src="video.mp4" type="video/mp4">
-        Browser Anda tidak mendukung video.
-      </video>
+      <div class="signature">Elisa Ribka Elmelcia</div>
+    </div>
+
+    <div class="tree-container">
+      <img src="pohon.png" alt="Pohon Natal">
     </div>
   </div>
 
-  <div class="tree-container">
-    <img src="pohon.png" alt="Pohon Natal">
-  </div>
-
+  <!-- Audio -->
   <audio id="bgMusic" loop>
     <source src="natal.mp3" type="audio/mpeg">
   </audio>
@@ -142,17 +148,26 @@
     function pauseMusic() { bgMusic.pause(); }
     function playBell() { bellSound.currentTime = 0; bellSound.play(); }
 
-    function createSnowflake() {
-      const snowflake = document.createElement("div");
-      snowflake.classList.add("snowflake");
-      snowflake.textContent = "❄";
-      snowflake.style.left = Math.random() * window.innerWidth + "px";
-      snowflake.style.animationDuration = (Math.random() * 3 + 2) + "s";
-      document.body.appendChild(snowflake);
-      setTimeout(() => snowflake.remove(), 5000);
-    }
-    setInterval(createSnowflake, 200);
+    // Countdown selesai -> tampilkan kartu
+    const countdownVideo = document.getElementById("countdown-video");
+    countdownVideo.onended = function() {
+      document.getElementById("countdown-screen").style.display = "none";
+      document.getElementById("card-screen").style.display = "block";
+    };
 
+    // Confetti + Sparkles
+    function createConfetti() {
+      const confetti = document.createElement("div");
+      confetti.classList.add("confetti");
+      confetti.textContent = ["🎉","🎊","✨","⭐"][Math.floor(Math.random()*4)];
+      confetti.style.left = Math.random() * window.innerWidth + "px";
+      confetti.style.animationDuration = (Math.random() * 3 + 2) + "s";
+      document.body.appendChild(confetti);
+      setTimeout(() => confetti.remove(), 5000);
+    }
+    setInterval(createConfetti, 200);
+
+    // Kembang api
     function createFirework() {
       const firework = document.createElement("div");
       firework.classList.add("firework");
@@ -163,19 +178,9 @@
     }
     setInterval(createFirework, 2000);
 
+    // Lampu pohon
     function createLights() {
       const treeArea = document.querySelector(".tree-container");
       for (let i = 0; i < 30; i++) {
         const light = document.createElement("div");
-        light.classList.add("light");
-        light.style.top = (Math.random() * 500) + "px";
-        light.style.left = (Math.random() * 300) + "px";
-        light.style.background = ["red","yellow","blue","orange"][Math.floor(Math.random()*4)];
-        light.style.animationDuration = (Math.random()*1.5+0.5)+"s";
-        treeArea.appendChild(light);
-      }
-    }
-    createLights();
-  </script>
-</body>
-</html>
+       
