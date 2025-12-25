@@ -103,7 +103,7 @@
 <body>
   <!-- Layar Countdown -->
   <div id="countdown-screen">
-    <video id="countdown-video" width="100%" autoplay>
+    <video id="countdown-video" width="100%" autoplay muted playsinline>
       <source src="countdown.mp4" type="video/mp4">
       Browser Anda tidak mendukung video.
     </video>
@@ -183,4 +183,7 @@
       const treeArea = document.querySelector(".tree-container");
       for (let i = 0; i < 30; i++) {
         const light = document.createElement("div");
-       
+        light.classList.add("light");
+        light.style.top = (Math.random() * 500) + "px";
+        light.style.left = (Math.random() * 300) + "px";
+        light.style.background = ["red","yellow","blue","orange"][Math.floor(Math.random()*
